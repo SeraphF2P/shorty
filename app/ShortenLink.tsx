@@ -5,8 +5,6 @@ import Btn from "../components/Btn";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import SuspenseErrorBoundary from "../components/SuspenseErrorBoundary";
-import GeneratedLinks from "./GeneratedLinks";
 import  { mutate } from "swr";
 export default function ShortenLink() {
   const validationSchema = Yup.object().shape({

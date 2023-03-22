@@ -76,7 +76,7 @@ export default forwardRef<
         className={`
        ${
          shape == "filled"
-           ? " shadow-inherit rounded-full bg-cyan shadow-sm hover:bg-cyan/80 active:bg-cyan/90 active:shadow-inner disabled:bg-grayish disabled:text-gray"
+           ? " shadow-inherit rounded-full bg-cyan shadow-sm hover:bg-cyan/80 active:bg-cyan/90 active:shadow-inner disabled:bg-gray disabled:text-grayish"
            : shape == "outlined"
            ? " shadow-inherit disabled:ring-neutral-LightGray ring-solid disabled:ring-solid rounded-full   shadow-sm ring-4 ring-currentColor  active:bg-cyan/90  active:shadow-inner disabled:text-gray  disabled:ring-4"
            : ""
