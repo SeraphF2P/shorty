@@ -1,4 +1,3 @@
-
 import {
   FaFacebookSquare,
   FaTwitter,
@@ -8,14 +7,14 @@ import {
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import Btn from "../components/Btn";
+import Btn from "./components/Btn";
 import { BoostYourLink } from "./BoostYourLink";
 import Card from "./Card";
 import ShortenLink from "./ShortenLink";
-import RegesterContext from "./(context)/RegesterContext";
-import MyTostContainer from "../components/MyTostContainer";
+import RegesterContext from "./context/RegesterContext";
+import MyTostContainer from "./components/MyTostContainer";
 import GeneratedLinks from "./GeneratedLinks";
-import SuspenseErrorBoundary from "../components/SuspenseErrorBoundary";
+import SuspenseErrorBoundary from "./components/SuspenseErrorBoundary";
 import Header from "./Header";
 const poppins = Poppins({
   subsets: ["devanagari"],

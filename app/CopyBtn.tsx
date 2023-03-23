@@ -1,15 +1,9 @@
 "use client";
-import Btn from "../components/Btn";
+import Btn from "./components/Btn";
 import useCopyToClipboard from "./hooks/useCopyToClipboard";
 
-type CopyProps = {
-  copyToClipboard: (text: any, options?: undefined) => void;
-  value: undefined | string;
-  success: undefined | boolean;
-};
-
 export default ({ shortLink }: { shortLink: string }) => {
-  const { copyToClipboard, success }: CopyProps = useCopyToClipboard();
+  const { copyToClipboard, success } = useCopyToClipboard();
   return (
     <Btn
       onClick={() => {

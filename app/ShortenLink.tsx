@@ -1,11 +1,11 @@
 "use client";
 import { Field, Form, ErrorMessage, Formik } from "formik";
 import Image from "next/image";
-import Btn from "../components/Btn";
+import Btn from "./components/Btn";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import  { mutate } from "swr";
+import { mutate } from "swr";
 export default function ShortenLink() {
   const validationSchema = Yup.object().shape({
     link: Yup.string()

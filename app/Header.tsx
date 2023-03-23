@@ -4,8 +4,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import Btn from "../components/Btn";
-import { useRegesterCotext } from "./(context)/RegesterContext";
+import Btn from "./components/Btn";
+import { useRegesterCotext } from "./context/RegesterContext";
 import useScrollSensore from "./hooks/useScrollSensore";
 
 const navlinks = [

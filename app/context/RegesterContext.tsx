@@ -9,7 +9,7 @@ import {
   Fragment,
 } from "react";
 import { Dialog } from "@headlessui/react";
-import Btn from "../../components/Btn";
+import Btn from "../components/Btn";
 import { Field, Formik, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -78,7 +78,7 @@ export default ({ children }: Props) => {
             setSubmitting(false);
             setIsloginOpen(false);
           });
-     
+
         if (res.status === 200) {
           if (res.data.success === 1) {
             localStorage.setItem("token", res.data.token);
