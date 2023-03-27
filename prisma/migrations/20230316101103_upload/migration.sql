@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Link" ALTER COLUMN "link" DROP NOT NULL,
-ALTER COLUMN "shortLink" DROP NOT NULL;

@@ -23,6 +23,7 @@ const poppins = Poppins({
 });
 
 export default async function Home() {
+  
   return (
     <>
       <main className={`${poppins.variable}  overflow-hidden `}>
@@ -31,16 +32,20 @@ export default async function Home() {
           <Header />
         </RegesterContext>
         <section className="container relative mx-auto  flex h-screen w-11/12 flex-col items-center justify-center  pt-20  md:flex-row-reverse  ">
-          <div className=" relative  left-[5%] w-[150%]  [aspect-ratio:733/482] ">
-            <Image
-              priority
-              fill
-              alt="illustration-working"
-              src={"/images/illustration-working.svg"}
-            />
+          <div className=" relative  left-0 w-[120%]  ">
+            <div className=" relative  left-[10%] w-[120%] [aspect-ratio:733/482] xsm:w-[100%]  ">
+              <Image
+                priority
+                fill
+                alt="illustration-working"
+                src={"/images/illustration-working.svg"}
+              />
+            </div>
           </div>
-          <aside className="  prose flex w-[110%] flex-col items-center justify-center p-4 text-center md:items-start   md:text-left ">
-            <h1 className=" mb-0 md:text-6xl ">More than just shorter links</h1>
+          <aside className="  prose flex w-[110%] flex-col items-center justify-center p-4 text-center md:w-[130%] md:items-start   md:text-left ">
+            <h1 className=" mb-0 md:text-5xl lg:text-6xl ">
+              More than just shorter links
+            </h1>
             <p>
               Build your brand’s recognition and get detailed insights on how
               your links are performing.
