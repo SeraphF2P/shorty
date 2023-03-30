@@ -28,12 +28,14 @@ const Regester = createContext<{
 export const useRegesterCotext = () => {
   return useContext(Regester);
 };
+
 type Props = { children: ReactNode };
+type Data = { email: string; password: string };
+
 export default ({ children }: Props) => {
   const [isLoginOpen, setIsloginOpen] = useState(false);
   const [isLogOutOpen, setIsLogOutOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  // const { getGeneratedLinks } = useGeneratedLinksCotext();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Please add a link"),
@@ -42,7 +44,7 @@ export default ({ children }: Props) => {
       .max(12, "Password can't be more than 12 characters")
       .required("Password is Required"),
   });
-  type Data = { email: string; password: string };
+
   const submitHandeler = async (
     { email, password }: Data,
     { setSubmitting }: { setSubmitting: (val: boolean) => void }

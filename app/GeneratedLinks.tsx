@@ -18,17 +18,17 @@ const getGeneratedLinks = async (apiEndPoint: string) => {
   }
 };
 export default () => {
-  const { data: generatedLinks }: { data: generatedLinksType } = useSWR(
+  const { data }: { data: generatedLinksType } = useSWR(
     `/api/shortenlinks`,
     getGeneratedLinks,
-    { suspense: true, revalidateOnFocus: true }
+    { suspense: true, refreshInterval: 60 }
   );
 
   return (
     <section className=" relative   max-h-[292px] w-full overflow-y-scroll  bg-gray/20 py-4  lg:px-20">
       <div className="container mx-auto flex flex-col gap-4">
-        {generatedLinks &&
-          generatedLinks.reverse().map(({ link, shortLink }, ind) => {
+        {data &&
+          data.reverse().map(({ link, shortLink }, ind) => {
             return (
               <div
                 key={ind}

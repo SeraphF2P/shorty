@@ -2,23 +2,14 @@ import { prisma } from "../../../prisma/client";
 
 export async function POST(req: Request, res: Response) {
   const data = await req.json();
+  const JWT = require("jsonwebtoken");
   try {
-    const newUser = await prisma.User.create({
-      data: {
+    const existsUser = await prisma.User.findUnique({
+      where: {
         email: data.email,
-        password: data.password,
       },
     });
-    if (newUser) {
-      return new Response(
-        JSON.stringify({
-          status: 200,
-          success: 1,
-          token: newUser.id,
-          msg: "you have sign up successfully ",
-        })
-      );
-    } else {
+    if (existsUser)
       return new Response(
         JSON.stringify({
           status: 401,
@@ -26,7 +17,24 @@ export async function POST(req: Request, res: Response) {
           msg: "user already exists",
         })
       );
-    }
+    const newUser = await prisma.User.create({
+      data: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    const token = await JWT.sign(
+      { id: newUser.id },
+      process.env.JWT_SECRET_KEY
+    );
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        success: 1,
+        token: token,
+        msg: "you have sign up successfully ",
+      })
+    );
   } catch (err) {
     console.log(err);
     return new Response(
