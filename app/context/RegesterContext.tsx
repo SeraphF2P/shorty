@@ -50,6 +50,7 @@ export default ({ children }: Props) => {
     { setSubmitting }: { setSubmitting: (val: boolean) => void }
   ) => {
     try {
+      if (typeof window === "undefined") return;
       setSubmitting(true);
       if (isSignUpOpen) {
         const res = await axios
@@ -85,7 +86,6 @@ export default ({ children }: Props) => {
           if (res.data.success === 1) {
             localStorage.setItem("token", res.data.token);
             toast.success(res.data.msg);
-            // getGeneratedLinks();
           } else if (res.data.success === 0) {
             toast.error(res.data.msg);
           }
@@ -204,6 +204,7 @@ export default ({ children }: Props) => {
                 className="rounded-sm bg-red px-4 py-2 hover:bg-red/80 hover:text-very-dark-blue/90 active:bg-red/90 active:text-very-dark-blue/90"
                 onClick={() => {
                   {
+                    if (typeof window === "undefined") return;
                     localStorage.removeItem("token");
                     setIsLogOutOpen(false);
                   }

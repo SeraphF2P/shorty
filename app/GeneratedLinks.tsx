@@ -6,6 +6,7 @@ import CopyBtn from "./CopyBtn";
 
 type generatedLinksType = [{ link: string; shortLink: string }] | null;
 const getGeneratedLinks = async (apiEndPoint: string) => {
+  if (typeof window === "undefined") return;
   if (localStorage.getItem("token") == null) return null;
   const res = await axios.post(apiEndPoint, {
     headers: {

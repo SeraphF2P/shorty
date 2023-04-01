@@ -2,6 +2,7 @@
 import { useEffect, useMemo } from "react";
 import { nanoid } from "nanoid";
 function createNewStyleSheets(stylesheetID: string) {
+  if (typeof window === "undefined") return;
   if (document.getElementById(stylesheetID) == null) {
     const head = document.querySelector("head");
     const styleSheet = document.createElement("style");

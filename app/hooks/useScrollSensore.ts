@@ -79,6 +79,7 @@ export default function useScrollSensore(
     scrollOnX = false,
     selector = "",
   } = { ...options };
+  if (typeof window === "undefined") return;
 
   const {
     elementRef,

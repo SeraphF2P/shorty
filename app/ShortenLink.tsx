@@ -16,6 +16,7 @@ export default function ShortenLink() {
     values: any,
     { setSubmitting }: { setSubmitting: (val: boolean) => void }
   ) => {
+    if (typeof window === "undefined") return;
     setSubmitting(true);
     const res = await axios
       .post("/api/shortener", {
@@ -47,7 +48,7 @@ export default function ShortenLink() {
                 <Image
                   className="   rounded bg-dark-violet"
                   src={
-                    window.innerWidth > 768
+                    typeof window !== "undefined" && window.innerWidth > 768
                       ? "/images/bg-shorten-desktop.svg"
                       : "/images/bg-shorten-mobile.svg"
                   }

@@ -31,6 +31,7 @@ export default () => {
   const { setIsloginOpen, setIsSignUpOpen, setIsLogOutOpen } =
     useRegesterCotext();
   const loginOnClickHandeler = () => {
+    if (typeof window === "undefined") return;
     if (localStorage.getItem("token")) {
       setIsLogOutOpen(true);
     } else {
@@ -94,7 +95,11 @@ export default () => {
                 <Btn
                   onClick={loginOnClickHandeler}
                   status=" border-2 px-4 py-2 rounded-full border-solid border-cyan"
-                  hasStatus={localStorage.getItem("token") != undefined}
+                  hasStatus={
+                    typeof window === "undefined"
+                      ? false
+                      : localStorage.getItem("token") != undefined
+                  }
                   className="w-full  text-center text-sm ui-active:bg-cyan"
                 >
                   {({ hasStatus }: { hasStatus: boolean }) => {
@@ -110,7 +115,11 @@ export default () => {
                     setIsSignUpOpen(true);
                   }}
                   status=" hidden"
-                  hasStatus={localStorage.getItem("token") != undefined}
+                  hasStatus={
+                    typeof window === "undefined"
+                      ? false
+                      : localStorage.getItem("token") != undefined
+                  }
                 >
                   Sign up
                 </Btn>
@@ -142,7 +151,11 @@ export default () => {
               <Btn
                 onClick={loginOnClickHandeler}
                 status=" border-2 px-4 py-2 rounded-full border-solid border-cyan"
-                hasStatus={localStorage.getItem("token") != undefined}
+                hasStatus={
+                  typeof window === "undefined"
+                    ? false
+                    : localStorage.getItem("token") != undefined
+                }
                 className=" text-center text-sm !text-gray  ui-active:scale-105"
               >
                 {({ hasStatus }: { hasStatus: boolean }) => {
@@ -154,7 +167,11 @@ export default () => {
               <Btn
                 className="   py-2 px-4 text-center text-sm ui-active:scale-105 "
                 status=" hidden"
-                hasStatus={localStorage.getItem("token") != undefined}
+                hasStatus={
+                  typeof window === "undefined"
+                    ? false
+                    : localStorage.getItem("token") != undefined
+                }
                 shape="filled"
                 onClick={() => {
                   setIsSignUpOpen(true);

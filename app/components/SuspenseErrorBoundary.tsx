@@ -18,23 +18,25 @@ export default ({ children }: Props) => {
         </div>
       }
     >
-      <Suspense
-        fallback={
-          <div className={` grid h-40 w-screen  bg-transparent`}>
-            <div className=" m-auto">
-              <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="96"
-                visible={true}
-              />
+      {typeof window !== "undefined" && (
+        <Suspense
+          fallback={
+            <div className={` grid h-40 w-screen  bg-transparent`}>
+              <div className=" m-auto">
+                <RotatingLines
+                  strokeColor="grey"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="96"
+                  visible={true}
+                />
+              </div>
             </div>
-          </div>
-        }
-      >
-        {children}
-      </Suspense>
+          }
+        >
+          {children}
+        </Suspense>
+      )}
     </ErrorBoundary>
   );
 };

@@ -12,7 +12,7 @@ export const BoostYourLink = (props: Props) => {
         className="-z-10 bg-dark-violet "
         fill
         src={
-          window.innerWidth > 768
+          typeof window !== "undefined" && window.innerWidth > 768
             ? "/images/bg-boost-desktop.svg"
             : "/images/bg-boost-mobile.svg"
         }
