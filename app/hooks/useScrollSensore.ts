@@ -1,3 +1,4 @@
+"use client";
 
 import { useRef, useEffect, MutableRefObject } from "react";
 import { debounce, throttle } from "../utility_function/performance";
