@@ -3,6 +3,7 @@ import "./globals.css";
 export const metadata = {
   title: "shorty",
   description: "url shortener website",
+  authors: authors: "jafer ali",
   openGraph: {
     images: {
       url: "/images/shorty-social-media-card.jpg",
