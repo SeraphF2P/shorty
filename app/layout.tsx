@@ -3,6 +3,13 @@ import "./globals.css";
 export const metadata = {
   title: "shorty",
   description: "url shortener website",
+  openGraph: {
+    images: {
+      url: "/images/shorty-social-media-card.jpg",
+      width: "1200px",
+      height: "620px",
+    },
+  },
 };
 
 export default function RootLayout({
