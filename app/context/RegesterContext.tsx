@@ -1,19 +1,19 @@
 "use client";
+import { Dialog } from "@headlessui/react";
+import axios from "axios";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import {
   createContext,
+  Dispatch,
+  Fragment,
   ReactNode,
+  SetStateAction,
   useContext,
   useState,
-  Dispatch,
-  SetStateAction,
-  Fragment,
 } from "react";
-import { Dialog } from "@headlessui/react";
-import Btn from "../components/Btn";
-import { Field, Formik, ErrorMessage, Form } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
 import { toast } from "react-toastify";
+import Btn from "../components/Btn";
+import { SignUpSchema } from "../lib/yupSchema";
 
 const Regester = createContext<{
   setIsloginOpen: Dispatch<SetStateAction<boolean>>;
@@ -36,14 +36,6 @@ export default ({ children }: Props) => {
   const [isLoginOpen, setIsloginOpen] = useState(false);
   const [isLogOutOpen, setIsLogOutOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email().required("Please add a link"),
-    password: Yup.string()
-      .min(6, "Password can't be less than 6 characters")
-      .max(12, "Password can't be more than 12 characters")
-      .required("Password is Required"),
-  });
 
   const submitHandeler = async (
     { email, password }: Data,
@@ -113,22 +105,20 @@ export default ({ children }: Props) => {
         }}
       >
         <Formik
-          initialValues={{ email: "", password: "" }}
-          validationSchema={validationSchema}
+          initialValues={{ email: "", password: "", password_Confirmation: "" }}
+          validationSchema={SignUpSchema}
           onSubmit={submitHandeler}
         >
           {({ isSubmitting }) => {
             return (
               <Form className=" fixed top-0 left-[-10%] z-40 grid h-screen   w-[120%] bg-grayish/40  backdrop-blur-sm">
                 <Dialog.Panel className=" m-auto  flex animate-fadeUp flex-col items-center justify-center gap-5  rounded bg-white py-8 px-4 ">
-                  <Dialog.Title>
-                    {isLoginOpen ? "Login" : "Sign Up"}
-                  </Dialog.Title>
+                  <Dialog.Title>Sign Up</Dialog.Title>
                   <div className=" relative">
                     <Field
-                      name="email"
+                      name="username"
                       type="text"
-                      placeholder="email"
+                      placeholder="username"
                       className="form-field"
                       autoComplete="true"
                     />
@@ -144,6 +134,21 @@ export default ({ children }: Props) => {
                       name="password"
                       type="password"
                       placeholder="password"
+                      className="form-field"
+                      autoComplete="true"
+                    />
+                    <label className=" sr-only">enter an password</label>
+                    <ErrorMessage
+                      className=" form-error"
+                      name="password"
+                      component="div"
+                    />
+                  </div>
+                  <div className=" relative">
+                    <Field
+                      name="password_Confirmation"
+                      type="password"
+                      placeholder="confirm password"
                       className="form-field"
                       autoComplete="true"
                     />

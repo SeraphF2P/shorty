@@ -11,7 +11,6 @@ export async function POST(req: Request) {
       process.env.JWT_SECRET_KEY,
       async (err: any, { id }: { id: string }) => {
         if (err) {
-          console.log(err);
           return new Response(
             JSON.stringify({
               status: 401,
@@ -45,7 +44,6 @@ export async function POST(req: Request) {
       }
     );
   } catch (err) {
-    console.log("catchedError", err);
     return new Response(
       JSON.stringify({
         status: 500,
