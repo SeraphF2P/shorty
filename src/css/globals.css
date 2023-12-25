@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 .form-field {
-  @apply w-full rounded border-gray placeholder-gray shadow focus:ring-2 valid:focus:text-cyan valid:focus:ring-cyan invalid:focus:border-transparent invalid:focus:ring-red;
+  @apply w-full rounded border-none border-gray placeholder-gray shadow-sm ring-1 ring-gray focus:ring-2 valid:focus:text-cyan valid:focus:ring-cyan invalid:focus:border-transparent invalid:focus:ring-red;
 }
 .form-error {
-  @apply absolute left-0 top-full p-1 text-xs font-bold text-red;
+  @apply absolute left-0 top-full px-1 text-xs text-red;
 }
 :root {
   --Cyan: 180, 66%, 49%;

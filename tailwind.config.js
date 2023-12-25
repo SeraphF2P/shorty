@@ -3,9 +3,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     colors: {
@@ -25,18 +23,29 @@ module.exports = {
         poppins: "--font-poppins"
       },
       screens: {
-        min: "320px",
-        xxsm: "420px",
-        xsm: "576px",
+        mn: "420px",
       },
       animation: {
-        "fadeUp": "fadeUp 0.7s ease-in-out forwards",
+        fadein:
+          "fadein var(--fadein-duration,0.3s) forwards  var(--fadein-delay,0s)",
+        fadeout:
+          "fadeout var(--fadeout-duration,0.3s) forwards var(--fadeout-delay,0s)",
       },
       keyframes: {
-        "fadeUp": {
-          "0%": { transform: "translateY(2%);", opacity: 0 },
-          "100%": { transform: "translateY(0%);", opacity: 1 }
-        }
+        fadein: {
+          to: {
+            opacity: "var(--fadein-opacity,1)",
+            transform:
+              "translate(var(--fade-translate-x,0) , var(--fade-translate-y,0)) rotate(var(--fade-rotate)) skewX(var(--fade-skew-x,0)) skewY(var(--fade-skew-y,0)) scaleX(var(--fade-scale-x,1)) scaleY(var(--fade-scale-y,1));",
+          },
+        },
+        fadeout: {
+          from: {
+            opacity: "var(--fadeout-opacity,1)",
+            transform:
+              "translate(var(--fade-translate-x,0) , var(--fade-translate-y,0)) rotate(var(--fade-rotate)) skewX(var(--fade-skew-x,0)) skewY(var(--fade-skew-y,0)) scaleX(var(--fade-scale-x,1)) scaleY(var(--fade-scale-y,1));",
+          },
+        },
       }
     },
   },
@@ -44,9 +53,6 @@ module.exports = {
     aspectRatio: false,
   },
   plugins: [
-    require("tailwindcss-brand-colors"),
-    require("tailwindcss-debug-screens"),
-    require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),

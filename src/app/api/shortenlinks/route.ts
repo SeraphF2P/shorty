@@ -1,4 +1,4 @@
-import { prisma } from "../../../prisma/client";
+import { db } from "~/prisma/client";
 
 export async function POST(req: Request) {
   const JWT = require("jsonwebtoken");
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             })
           );
         }
-        const links = await prisma.Link.findMany({
+        const links = await db.link.findMany({
           where: {
             userId: id,
           },

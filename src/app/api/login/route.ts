@@ -1,12 +1,12 @@
-import { prisma } from "../../../prisma/client";
+import { db } from "~/prisma/client";
 
 export async function POST(req: Request) {
   const data = await req.json();
   const JWT = require("jsonwebtoken");
   try {
-    const user = await prisma.User.findUnique({
+    const user = await db.user.findUnique({
       where: {
-        email: data.email,
+        username: data.username,
       },
     });
     if (user == null) {

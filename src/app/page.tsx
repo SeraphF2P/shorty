@@ -1,21 +1,17 @@
-import {
-  FaFacebookSquare,
-  FaTwitter,
-  FaPinterest,
-  FaInstagram,
-} from "react-icons/fa";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import Btn from "./components/Btn";
-import { BoostYourLink } from "./BoostYourLink";
-import Card from "./Card";
-import ShortenLink from "./ShortenLink";
-import RegesterContext from "./context/RegesterContext";
-import MyTostContainer from "./components/MyTostContainer";
-import GeneratedLinks from "./GeneratedLinks";
-import SuspenseErrorBoundary from "./components/SuspenseErrorBoundary";
-import Header from "./Header";
+import {
+  FaFacebookSquare, FaInstagram, FaPinterest, FaTwitter
+} from "react-icons/fa";
+import { BoostYourLink } from "../ui/BoostYourLink";
+import Btn from "../ui/Btn";
+import Card from "../ui/Card";
+import GeneratedLinks from "../ui/GeneratedLinks";
+import Header from "../ui/Header";
+import MyTostContainer from "../ui/MyTostContainer";
+import ShortenLink from "../ui/ShortenLink";
+import SuspenseErrorBoundary from "../ui/SuspenseErrorBoundary";
 const poppins = Poppins({
   subsets: ["devanagari"],
   weight: ["500", "700"],
@@ -28,9 +24,7 @@ export default async function Home() {
     <>
       <main className={`${poppins.variable}  overflow-hidden `}>
         <MyTostContainer />
-        <RegesterContext>
           <Header />
-        </RegesterContext>
         <section className="container relative mx-auto  flex h-screen w-11/12 flex-col items-center justify-center  pt-20  md:flex-row-reverse  ">
           <div className=" relative  left-0 w-[120%]  ">
             <div className=" relative  left-[10%] w-[120%] [aspect-ratio:733/482] xsm:w-[100%]  ">
@@ -50,7 +44,7 @@ export default async function Home() {
               Build your brand’s recognition and get detailed insights on how
               your links are performing.
             </p>
-            <Btn shape="filled" className=" px-4 py-2">
+            <Btn  className=" px-4 py-2">
               Get Started
             </Btn>
           </aside>

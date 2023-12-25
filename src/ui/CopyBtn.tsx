@@ -1,6 +1,7 @@
 "use client";
-import Btn from "./components/Btn";
-import useCopyToClipboard from "./hooks/useCopyToClipboard";
+
+import useCopyToClipboard from "../hooks/useCopyToClipboard";
+import Btn from "./Btn";
 
 export default ({ shortLink }: { shortLink: string }) => {
   const { copyToClipboard, success } = useCopyToClipboard();

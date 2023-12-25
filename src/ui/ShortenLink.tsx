@@ -1,11 +1,11 @@
 "use client";
 import { Field, Form, ErrorMessage, Formik } from "formik";
 import Image from "next/image";
-import Btn from "./components/Btn";
 import axios from "axios";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
+import Btn from "./Btn";
 export default function ShortenLink() {
   const validationSchema = Yup.object().shape({
     link: Yup.string()
@@ -76,7 +76,7 @@ export default function ShortenLink() {
                 <Btn
                   disabled={isSubmitting}
                   type="submit"
-                  shape="filled"
+                  
                   className=" relative whitespace-nowrap rounded-sm px-4 py-2 "
                   onClick={() => {
                     submitForm().finally(() => {

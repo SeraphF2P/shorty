@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Btn from "./components/Btn";
+import Btn from "./Btn";
 
 type Props = {};
 
