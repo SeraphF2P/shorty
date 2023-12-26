@@ -14,6 +14,7 @@ export const variants = cva(
     variants: {
       variant: {
         fill: " bg-cyan  hover:bg-cyan/80  hover:scale-105 text-white capitalize active:scale-95  ",
+        alert: " bg-red  hover:bg-red/80  hover:scale-105 text-white capitalize active:scale-95  ",
         outline:
           " ring-solid  duration-700  ring-2 ring-variant hover:bg-variant active:bg-variant     ",
         ghost:

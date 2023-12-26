@@ -1,60 +1,71 @@
 "use client";
-import { Field, Form, ErrorMessage, Formik } from "formik";
-import Image from "next/image";
+import { useViewportSize } from "@mantine/hooks";
 import axios from "axios";
-import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import Image from "next/image";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
+import * as yup from "yup";
+import { CreateShortLinkSchema } from "../lib/yupSchema";
 import Btn from "./Btn";
+type CreateShortLinkFormType = yup.InferType<typeof CreateShortLinkSchema>;
 export default function ShortenLink() {
-  const validationSchema = Yup.object().shape({
-    link: Yup.string()
-      .url("Please enter a valid URL")
-      .required("Please add a link"),
-  });
   const submitHandeler = async (
-    values: any,
+    values: CreateShortLinkFormType,
     { setSubmitting }: { setSubmitting: (val: boolean) => void }
   ) => {
-    if (typeof window === "undefined") return;
     setSubmitting(true);
-    const res = await axios
+    await axios
       .post("/api/shortener", {
         link: values.link,
         token: localStorage.getItem("token"),
       })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success(res.data.msg);
+          mutate(`/api/shortenlinks`);
+        } else {
+          toast.error(res.data.msg);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.msg);
+        console.error(err);
+      })
       .finally(() => {
         setSubmitting(false);
       });
-    if (res.data.success === 1) {
-      toast.success(res.data.msg);
-      mutate(`/api/shortenlinks`);
-    } else {
-      toast.error(res.data.msg);
-    }
   };
+  const { width: vWidth } = useViewportSize();
 
   return (
     <>
-      <section className="  bg-shorten-link relative  mx-auto flex flex-col items-center justify-center lg:px-20 ">
+      <section className="  bg-shorten-link relative  mx-auto flex flex-col items-center justify-center xs:px-16 sm:px-24 md:px-8 ">
         <Formik
           initialValues={{ link: "" }}
-          validationSchema={validationSchema}
+          validationSchema={CreateShortLinkSchema}
           onSubmit={submitHandeler}
         >
           {({ isSubmitting, setFieldValue, submitForm }) => {
             return (
-              <Form className=" container relative mx-4 flex w-full flex-col gap-6 p-8 xsm:mx-8 xsm:flex-row  xsm:items-center ">
-                <Image
-                  className="   rounded bg-dark-violet"
-                  src={
-                    typeof window !== "undefined" && window.innerWidth > 768
-                      ? "/images/bg-shorten-desktop.svg"
-                      : "/images/bg-shorten-mobile.svg"
-                  }
-                  fill
-                  alt="background"
-                />
+              <Form className=" container relative mx-4 flex w-full flex-col gap-6 p-8 xs:mx-8 xs:flex-row  xs:items-center ">
+                {vWidth > 768 ? (
+                  <Image
+                    className="   rounded bg-dark-violet"
+                    src={"/images/bg-boost-desktop.svg"}
+                    sizes="600px 100px"
+                    fill
+                    alt="background"
+                  />
+                ) : (
+                  <Image
+                    className="   rounded bg-dark-violet"
+                    src={"/images/bg-shorten-mobile.svg"}
+                    fill
+                    sizes="300px 250px"
+                    alt="background"
+                  />
+                )}
 
                 <div className=" relative w-full">
                   <Field
@@ -76,7 +87,6 @@ export default function ShortenLink() {
                 <Btn
                   disabled={isSubmitting}
                   type="submit"
-                  
                   className=" relative whitespace-nowrap rounded-sm px-4 py-2 "
                   onClick={() => {
                     submitForm().finally(() => {

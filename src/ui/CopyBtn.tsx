@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import useCopyToClipboard from "../hooks/useCopyToClipboard";
+import { cn } from "../lib/cva";
 import Btn from "./Btn";
 
 export default ({ shortLink }: { shortLink: string }) => {
@@ -10,14 +12,11 @@ export default ({ shortLink }: { shortLink: string }) => {
       onClick={() => {
         copyToClipboard(location.host + "/" + shortLink);
       }}
-      status=" !bg-dark-violet"
-      hasStatus={success}
-      shape="filled"
-      className="rounded-sm  px-8 py-2"
+      className={cn("rounded-sm  px-8 py-2", {
+        "bg-dark-violet": success,
+      })}
     >
-      {({ hasStatus }: { hasStatus: boolean }) => {
-        return hasStatus ? "copied" : "copy";
-      }}
+      {success ? "copied" : "copy"}
     </Btn>
   );
 };

@@ -2,7 +2,10 @@ import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  FaFacebookSquare, FaInstagram, FaPinterest, FaTwitter
+  FaFacebookSquare,
+  FaInstagram,
+  FaPinterest,
+  FaTwitter,
 } from "react-icons/fa";
 import { BoostYourLink } from "../ui/BoostYourLink";
 import Btn from "../ui/Btn";
@@ -19,20 +22,19 @@ const poppins = Poppins({
 });
 
 export default async function Home() {
-  
   return (
     <>
       <main className={`${poppins.variable}  overflow-hidden `}>
         <MyTostContainer />
-          <Header />
-        <section className="container relative mx-auto  flex h-screen w-11/12 flex-col items-center justify-center  pt-20  md:flex-row-reverse  ">
+        <Header />
+        <section className="container relative mx-auto   flex h-screen w-11/12 flex-col items-center justify-center  pt-20   md:flex-row-reverse  ">
           <div className=" relative  left-0 w-[120%]  ">
-            <div className=" relative  left-[10%] w-[120%] [aspect-ratio:733/482] xsm:w-[100%]  ">
+            <div className=" relative  left-[10%] w-[120%] [aspect-ratio:733/482] xs:w-[100%]  ">
               <Image
                 priority
                 fill
                 alt="illustration-working"
-                src={"/images/illustration-working.svg"}
+                src="/images/illustration-working.svg"
               />
             </div>
           </div>
@@ -44,9 +46,7 @@ export default async function Home() {
               Build your brand’s recognition and get detailed insights on how
               your links are performing.
             </p>
-            <Btn  className=" px-4 py-2">
-              Get Started
-            </Btn>
+            <Btn className=" px-4 py-2">Get Started</Btn>
           </aside>
         </section>
         <ShortenLink />
@@ -62,15 +62,15 @@ export default async function Home() {
             </p>
           </div>
         </section>
-        <section className="min-h-screen w-full  bg-gray/20 md:min-h-[70vh] ">
+        <section className="min-h-screen w-full bg-gray/20  xs:px-16 sm:px-24 md:min-h-[70vh] md:px-8 ">
           <div
             className=" container relative mx-auto  flex flex-col  items-center
-      justify-center gap-20 py-10  md:min-h-[60vh] md:flex-row  md:gap-4 "
+      justify-center gap-20 py-10  md:min-h-[60vh] md:flex-row  md:gap-10 "
           >
             <div className="  absolute left-1/2 h-2/3 w-2 -translate-x-1/2 bg-cyan md:hidden" />
             <hr className=" absolute hidden  h-2 w-2/3 bg-cyan text-cyan md:block" />
             <Card
-              className=" xsm:self-start"
+              className=" xs:self-start"
               icon="/images/icon-brand-recognition.svg"
               title="Brand Recognition"
             >
@@ -79,7 +79,7 @@ export default async function Home() {
               content.
             </Card>
             <Card
-              className=" xsm:self-center"
+              className=" xs:self-center"
               icon="/images/icon-detailed-records.svg"
               title="Detailed Records"
             >
@@ -88,7 +88,7 @@ export default async function Home() {
               decisions.
             </Card>
             <Card
-              className=" xsm:self-end"
+              className=" xs:self-end"
               icon="/images/icon-fully-customizable.svg"
               title="Fully Customizable"
             >
@@ -100,7 +100,7 @@ export default async function Home() {
         <BoostYourLink />
       </main>
       <footer
-        className=" flex w-full flex-col items-center justify-center gap-8 bg-very-dark-blue  p-8 text-center text-white prose-li:my-2 prose-li:text-sm prose-li:text-grayish 
+        className=" flex w-full flex-col items-center justify-center gap-8 bg-very-dark-blue p-8 text-center  text-white prose-a:transition-colors hover:prose-a:text-cyan prose-li:my-2 prose-li:text-sm prose-li:text-grayish 
         md:flex-row md:items-start  md:justify-between md:px-10 lg:px-20"
       >
         <svg

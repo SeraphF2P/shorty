@@ -3,10 +3,13 @@ import React, { ReactNode, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { RotatingLines } from "react-loader-spinner";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
+import useIsMounted from "../hooks/useIsMounted";
 type Props = {
   children: ReactNode;
 };
 export default ({ children }: Props) => {
+  const { isMounted } = useIsMounted();
+  if (!isMounted) return null;
   return (
     <ErrorBoundary
       fallback={

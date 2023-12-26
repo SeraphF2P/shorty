@@ -19,12 +19,12 @@ const ConfirmModale: FC<ConfirmModaleProps> = ({
     <Modale>
       <Modale.Btn {...props} />
       <Modale.Content asChild>
-        <div className=" bg-theme  mx-2 w-full max-w-xs rounded p-4 text-center">
+        <div className=" mx-2  w-full max-w-xs rounded bg-very-dark-violet p-4 text-center text-white">
           <h2>{title}</h2>
           <p className=" py-6 leading-6">{content}</p>
           <div className=" flex justify-between">
             <Modale.Close variant="ghost">close</Modale.Close>
-            <Modale.Close className=" [--variant:--alert]" onClick={onConfirm}>
+            <Modale.Close variant="alert" onClick={onConfirm}>
               confirm
             </Modale.Close>
           </div>

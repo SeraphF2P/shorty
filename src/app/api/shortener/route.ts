@@ -1,6 +1,6 @@
-import { db } from "~/prisma/client";
-import { customRandom, random } from "nanoid";
 import * as JWT from "jsonwebtoken";
+import { customRandom, random } from "nanoid";
+import { db } from "~/prisma/client";
 export async function POST(req: Request) {
   const data = await req.json();
   try {
@@ -10,35 +10,41 @@ export async function POST(req: Request) {
       random
     );
 
-    const verifedData = await JWT.verify(
+    const verifedToken = JWT.verify(
       data.token,
-      process.env.JWT_SECRET_KEY
-    );
+      process.env.JWT_SECRET_KEY!
+    ) as { id: string };
+    if (!verifedToken) {
+      return new Response(JSON.stringify({
+        msg: "invalid link"
+      }), {
+        status: 400
+      })
+    }
     const url = await db.link.create({
       data: {
         link: data.link,
         shortLink: id(),
-        userId: verifedData.id,
+        userId: verifedToken.id,
       },
     });
     if (url) {
       return new Response(
         JSON.stringify({
-          status: 200,
-          success: 1,
-          msg: "link added successfully",
+          msg: "link created successfully",
           url: url,
-        })
+        }), {
+        status: 200
+      }
       );
     }
   } catch (err) {
-    console.log(err);
     return new Response(
       JSON.stringify({
-        status: 200,
-        success: 0,
         msg: "link already exists",
-      })
+      }), {
+      status: 400,
+    }
     );
   }
 }

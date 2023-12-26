@@ -1,16 +1,16 @@
 import "../css/globals.css";
 
 export const metadata = {
-  title: "shorty",
+  title: "shortly",
   description: "url shortener website",
-  // openGraph: {
-  //   images: {
-  //     url: "/images/shorty-social-media-card.jpg",
-  //     width: "1200px",
-  //     height: "620px",
-  //   },
-  //   authors: "jafer ali",
-  // },
+  openGraph: {
+    images: {
+      url: "/images/shorty-social-media-card.jpg",
+      width: "1200px",
+      height: "620px",
+    },
+    authors: "jafer ali",
+  },
 };
 
 export default function RootLayout({

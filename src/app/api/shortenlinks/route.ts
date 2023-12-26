@@ -1,55 +1,56 @@
 import { db } from "~/prisma/client";
 
-export async function POST(req: Request) {
-  const JWT = require("jsonwebtoken");
-  const request = await req.json();
-  const authHeaders = request.headers["Authorization"];
-  const token = authHeaders && authHeaders.split(" ")[1];
+import * as JWT from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
+import { Link } from "@prisma/client";
+
+type Data = {
+  msg: string,
+  generatedLinks: Link[]
+}
+export async function POST(req: NextRequest, res: NextResponse<Data>) {
+  const data = await req.json();
+  if (!data.token) return new Response(JSON.stringify({
+    msg: "unautheraize please login first"
+  }), {
+    status: 401,
+  })
+
   try {
-    return await JWT.verify(
-      token,
-      process.env.JWT_SECRET_KEY,
-      async (err: any, { id }: { id: string }) => {
-        if (err) {
-          return new Response(
-            JSON.stringify({
-              status: 401,
-              success: 0,
-              msg: "unauthorized",
-            })
-          );
-        }
-        const links = await db.link.findMany({
-          where: {
-            userId: id,
-          },
-        });
-        if (links == null) {
-          return new Response(
-            JSON.stringify({
-              status: 404,
-              success: 0,
-              msg: "failed to find links",
-            })
-          );
-        } else {
-          return new Response(
-            JSON.stringify({
-              status: 200,
-              success: 1,
-              generatedLinks: links,
-            })
-          );
-        }
+    const verfiedToken = await JWT.verify(
+      data.token,
+      process.env.JWT_SECRET_KEY!,
+    ) as { id: string }
+
+    if (!verfiedToken) return new Response(JSON.stringify({
+      msg: "unautheraize please login first"
+    }), {
+      status: 401,
+    })
+
+    const links = await db.link.findMany({
+      where: {
+        userId: verfiedToken.id,
+      },
+      orderBy: {
+        createdAt: "desc"
       }
+    });
+
+    return new Response(
+      JSON.stringify({
+        generatedLinks: links,
+      }), {
+      status: 200,
+    }
     );
   } catch (err) {
     return new Response(
       JSON.stringify({
-        status: 500,
-        success: 0,
-        msg: "failed to load data",
-      })
+        msg: "failed to load links",
+      }), {
+      status: 500,
+    }
     );
   }
 }

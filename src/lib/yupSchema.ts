@@ -23,3 +23,8 @@ export const LoginSchema = yup.object({
     .max(12, "Password can't be more than 12 characters")
     .required("Password is Required"),
 })
+export const CreateShortLinkSchema = yup.object({
+  link: yup.string()
+    .url("Please enter a valid URL")
+    .required("Please add a link"),
+});

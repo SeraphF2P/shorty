@@ -8,34 +8,50 @@ import Btn from "./Btn";
 type SignUpFormType = yup.InferType<typeof SignUpSchema>;
 import { BtnProps } from "./Btn";
 import Modale from "./Modale";
+import { useState } from "react";
 
-export default ({ ...props }: BtnProps) => {
+export default ({
+  sethasAccount,
+  onClick,
+  ...props
+}: BtnProps & { sethasAccount: (val: boolean) => void }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const submitHandeler = async (
     values: SignUpFormType,
     { setSubmitting }: { setSubmitting: (val: boolean) => void }
   ) => {
-    console.log(values);
-    try {
-      setSubmitting(true);
-      const res = await axios.post("/api/signUp", values).finally(() => {
+    setSubmitting(true);
+    await axios
+      .post("/api/signUp", values)
+      .then((res) => {
+        if (res.status !== 200) return toast.error(res.data.msg);
+
+        if (res.status === 200) {
+          localStorage.setItem("token", res.data.token);
+          toast.success(res.data.msg);
+          sethasAccount(true);
+          setIsOpen(false);
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.msg);
+        console.error(err);
+      })
+      .finally(() => {
         setSubmitting(false);
       });
-      console.log(res);
-      if (res.status !== 200) return toast.error(res.data.msg);
-
-      if (res.status === 200) {
-        localStorage.setItem("token", res.data.token);
-        toast.success(res.data.msg);
-      }
-    } catch (err) {
-      toast.error("somthing went wrong");
-      console.error(err);
-      setSubmitting(false);
-    }
   };
   return (
-    <Modale>
-      <Modale.Btn {...props} />
+    <Modale open={isOpen}>
+      <Modale.Btn
+        onClick={(e) => {
+          setIsOpen(true);
+          if (onClick) {
+            onClick(e);
+          }
+        }}
+        {...props}
+      />
       <Modale.Content>
         <Formik
           initialValues={{

@@ -19,11 +19,19 @@ module.exports = {
       "very-dark-violet": "hsla(var(--Very-Dark-Violet),<alpha-value>)",
     },
     extend: {
+      container: {
+        center: true,
+        padding: "2rem",
+        screens: {
+          "2xl": "1400px",
+        },
+      },
       fontFamily: {
         poppins: "--font-poppins"
       },
       screens: {
         mn: "420px",
+        xs: "576px",
       },
       animation: {
         fadein:
@@ -48,9 +56,6 @@ module.exports = {
         },
       }
     },
-  },
-  corePlugins: {
-    aspectRatio: false,
   },
   plugins: [
     require("@tailwindcss/line-clamp"),
