@@ -44,7 +44,7 @@ export default ({
       });
   };
   return (
-    <Modale open={isOpen}>
+    <Modale open={isOpen} onOpenChange={setIsOpen}>
       <Modale.Btn
         onClick={(e) => {
           setIsOpen(true);
